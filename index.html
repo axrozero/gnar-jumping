@@ -19,16 +19,22 @@
             background-image: url('summoners_rift_custom.jpg');
             background-size: cover;
             background-position: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         #game {
             position: relative;
-            width: 900px;
-            height: 300px;
+            width: 95vw;
+            max-width: 900px;
+            height: 40vh;
+            max-height: 300px;
+            min-height: 200px;
             background: rgba(255, 255, 255, 0.7);
             border: 2px solid #333;
             overflow: hidden;
             margin-top: 40px;
+            box-sizing: border-box;
         }
 
         #game::before {
@@ -54,10 +60,14 @@
 
         #gnar {
             position: absolute;
-            left: 50px;
+            left: 6vw;
             bottom: 0;
-            width: 48px;
-            height: 54px;
+            width: 9vw;
+            min-width: 36px;
+            max-width: 48px;
+            height: 10vw;
+            min-height: 40px;
+            max-height: 54px;
             background: orange;
             border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
             z-index: 1;
@@ -255,8 +265,12 @@
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 54px;
-            height: 64px;
+            width: 10vw;
+            min-width: 36px;
+            max-width: 54px;
+            height: 12vw;
+            min-height: 44px;
+            max-height: 64px;
             background: none;
             z-index: 1;
         }
@@ -452,7 +466,7 @@
         }
 
         #score {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-top: 10px;
             color: orange;
         }
@@ -464,10 +478,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px 40px;
+            padding: 12px 10vw;
             border: 2px solid #333;
             border-radius: 10px;
-            font-size: 1.5em;
+            font-size: 1.1em;
             color: #c0392b;
             z-index: 2;
         }
@@ -475,7 +489,7 @@
         #restartBtn {
             display: block;
             margin: 15px auto 0 auto;
-            padding: 8px 20px;
+            padding: 8px 16px;
             font-size: 1em;
             background: #333;
             color: #fff;
@@ -490,6 +504,53 @@
 
         h1 {
             color: orange;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 600px) {
+            #game {
+                width: 99vw;
+                height: 38vh;
+                min-height: 160px;
+                margin-top: 10px;
+            }
+
+            #gnar {
+                left: 5vw;
+                width: 14vw;
+                min-width: 28px;
+                max-width: 38px;
+                height: 16vw;
+                min-height: 32px;
+                max-height: 44px;
+            }
+
+            .teemo-obstacle {
+                width: 14vw;
+                min-width: 28px;
+                max-width: 38px;
+                height: 16vw;
+                min-height: 32px;
+                max-height: 44px;
+            }
+
+            #score {
+                font-size: 1em;
+            }
+
+            #gameOver {
+                font-size: 1em;
+                padding: 10px 4vw;
+            }
+
+            #restartBtn {
+                font-size: 0.95em;
+                padding: 7px 10px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
@@ -663,6 +724,11 @@
             loseSound.play();
         }
 
+        function addTouchJump() {
+            game.addEventListener('touchstart', jump);
+            game.addEventListener('click', jump);
+        }
+
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 jump();
@@ -672,6 +738,7 @@
 
         // Start the game on load
         startGame();
+        addTouchJump();
     </script>
 </body>
 
